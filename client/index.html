@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      *,
+      *::after,
+      *::before {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .app {
+        display: flex;
+        --app-width: 500px;
+        width: var(--app-width);
+        flex-wrap: wrap;
+      }
+      .box {
+        background-color: #dff;
+        width: calc(var(--app-width) / 3);
+        height: calc(var(--app-width) / 3);
+        border: 1px solid;
+        text-align: center;
+        line-height: calc(var(--app-width) / 3);
+      }
+    </style>
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="app" id="app"></div>
+    </div>
+    <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
