@@ -1,12 +1,17 @@
-const { Server } = require("socket.io");
-const {
+import { Server } from "socket.io";
+import {
   playTurn,
   checkGameOver,
   createGameState,
   newPlayer,
-} = require("./game");
+  isPlayerTurn,
+} from "./game.js";
 
-const states = {};
+import { v4 as uuidv4 } from "uuid";
+
+import keyv from "./keyv.js";
+
+const states = (await keyv.get("states")) ?? {};
 
 const io = new Server(5000, {
   cors: {
@@ -15,32 +20,44 @@ const io = new Server(5000, {
 });
 
 io.on("connection", (socket) => {
-  console.log("server started");
+  socket.on("newGame", (data) => {
+    const { room, playerId } = JSON.parse(data);
 
-  socket.on("newGame", (room) => {
     states[room] = createGameState();
-    newPlayer(states[room], { id: socket.client.id });
   });
 
-  socket.on("join", (room) => {
+  socket.on("join", (data) => {
+    const { room, playerId } = JSON.parse(data);
+
     socket.join(room);
+
+    states[room] = states[room] ? states[room] : createGameState();
+
     const gameState = states[room];
 
-    newPlayer(gameState, { id: socket.client.id });
+    const id = playerId || uuidv4();
 
-    io.emit("init", JSON.stringify(gameState.data));
+    newPlayer(gameState, { id });
+    keyv.set("states", states).then((res) => {});
 
-    // Init the game
+    io.in(room).emit(
+      "init",
+      JSON.stringify({ room, gameState: gameState?.data, id })
+    );
   });
 
   // Listening on player events
   socket.on("play", (data) => {
-    const { room, i, j } = JSON.parse(data);
+    const { room, i, j, playerId } = JSON.parse(data);
+
     let gameState = states[room];
+
+    console.log(isPlayerTurn(gameState, playerId));
+    console.log(gameState, playerId);
+    if (!isPlayerTurn(gameState, playerId)) return;
     const pos = { i, j };
     playTurn(gameState, pos);
-
-    console.log("Player moved");
+    keyv.set("states", states);
 
     const isGameOver = checkGameOver(gameState);
 
@@ -53,7 +70,10 @@ io.on("connection", (socket) => {
         })
       );
       gameState = createGameState();
-      io.in(room).emit("init", JSON.stringify(gameState.data));
+      io.in(room).emit(
+        "init",
+        JSON.stringify({ room, gameState: gameState?.data })
+      );
 
       return;
     }

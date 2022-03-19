@@ -1,0 +1,15 @@
+{
+  "name": "tictactoe",
+  "version": "0.1.1",
+  "main": "index.js",
+  "author": "ayoubmehd <safi-_-gio-raja@live.fr>",
+  "license": "MIT",
+  "scripts": {
+    "client": "yarn --cwd react/ dev",
+    "serve": "yarn --cwd server/ dev",
+    "start": "concurrently \"yarn client\" \"yarn serve\" "
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

@@ -1,4 +1,3 @@
-"use strict";
 const n = 3;
 // const state = {
 //   data: Array(n)
@@ -8,7 +7,9 @@ const n = 3;
 //   isGameOver: false,
 // };
 
-function createGameState() {
+import keyv from "./keyv.js";
+
+export function createGameState() {
   return {
     data: Array(n)
       .fill(0)
@@ -19,12 +20,19 @@ function createGameState() {
   };
 }
 
-function playTurn(state, pos) {
-  state.data[pos.i][pos.j] = state.currentTurn;
-  state.currentTurn = state.currentTurn === 0 ? "O" : "X";
+export function playTurn(state, pos) {
+  state.data[pos.i][pos.j] = state.currentTurn === 0 ? "O" : "X";
+  state.currentTurn = (state.currentTurn + 1) % 2;
 }
 
-function checkGameOver(state) {
+export function isPlayerTurn(state, playerId) {
+  return (
+    state.currentTurn ===
+    state.players.findIndex((item) => item.id === playerId)
+  );
+}
+
+export function checkGameOver(state) {
   // let isGameOver = false;
 
   const gameData = state.data;
@@ -101,12 +109,8 @@ function checkGameOver(state) {
   return false;
 }
 
-function newPlayer(state, player) {
+export function newPlayer(state, player) {
+  if (!state) return;
+  if (state.players.find((item) => item.id === player.id)) return;
   state.players.push(player);
 }
-
-function isPlayerTurn(state, userId) {
-  state.players.findIndex(({ id }) => id === userId);
-}
-
-module.exports = { checkGameOver, playTurn, createGameState, newPlayer };

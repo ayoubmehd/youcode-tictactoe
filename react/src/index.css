@@ -1,0 +1,32 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.app {
+  display: flex;
+  --app-width: 500px;
+  width: var(--app-width);
+  flex-wrap: wrap;
+}
+.box {
+  background-color: #dff;
+  width: calc(var(--app-width) / 3);
+  height: calc(var(--app-width) / 3);
+  border: 1px solid;
+  text-align: center;
+  line-height: calc(var(--app-width) / 3);
+}
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

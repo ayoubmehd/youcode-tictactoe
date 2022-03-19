@@ -2,7 +2,11 @@
   "scripts": {
     "dev": "nodemon server.js"
   },
+  "type": "module",
   "dependencies": {
-    "socket.io": "^4.4.1"
+    "@keyv/sqlite": "^3.0.0",
+    "keyv": "^4.0.5",
+    "socket.io": "^4.4.1",
+    "uuid": "^8.3.2"
   }
 }
