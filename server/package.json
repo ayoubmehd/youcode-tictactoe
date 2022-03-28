@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "DEBUG=dev nodemon server.js"
   },
   "type": "module",
   "dependencies": {
