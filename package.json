@@ -13,5 +13,9 @@
     "concurrently": "^7.0.0",
     "debug": "^4.3.4",
     "dotenv": "^16.0.0"
-  }
+  },
+  "workspaces": [
+    "react",
+    "server"
+  ]
 }
