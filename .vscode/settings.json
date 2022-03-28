@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "tictactoe",
+            "database": "/server/database.sqlite"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
