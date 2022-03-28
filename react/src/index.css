@@ -30,3 +30,99 @@
   justify-content: center;
   align-items: center;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin-bottom: 0.7rem;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.new-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+}
+.new-game h1 {
+  margin-top: 0;
+}
+.new-game input,
+.new-game button {
+  margin: 0 2px;
+  padding: 10px 20px;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.new-game button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+button {
+  background: #324;
+  color: #fff;
+  outline: 0;
+  cursor: pointer;
+}
+
+/* Room */
+.room {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.copy {
+  width: 45%;
+  text-align: center;
+  background: #332;
+  color: #fff;
+  padding: 15px 0;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.copy button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  outline: 0;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background-color: rgb(230, 230, 230);
+  color: #324;
+}
